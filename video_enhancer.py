@@ -21,8 +21,6 @@ for source, settings in directories.items():
     unoptimized_video = get_unoptimized_video(video)
     if(unoptimized_video):
       settings['unoptimized_videos'].append(unoptimized_video)
-
-  print(settings['unoptimized_videos'])
   
   for video in settings['unoptimized_videos']:
     video_dir = get_video_dir(video)
