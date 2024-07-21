@@ -5,8 +5,9 @@ import subprocess
 import shutil
 
 def optimize_video(current_path, new_path, current_dir, settings, logging):
+
   command = "ffmpeg "
-  command += f"-i {current_path} "
+  command += f"-i '{current_path}' "
   command += "-metadata optimized=1 "
   command += f"-vcodec {settings['codec']} " if settings['codec'] else "-vcodec libx264 "
   command += f"-b:v {settings['bitrate']} " if settings['bitrate'] else "-b:v 4000k "
@@ -17,7 +18,7 @@ def optimize_video(current_path, new_path, current_dir, settings, logging):
   command += f"-c:a {settings['audio']} " if settings['audio'] else "-c:a aac "
   command += f"-b:a {settings['arate']} " if settings['arate'] else "-b:a 159k "
   command += "-map 0 "
-  command += new_path
+  command += f"'{new_path}'"
 
   if not os.path.exists(f'{current_dir}/temp'):
     os.mkdir(f'{current_dir}/temp')
