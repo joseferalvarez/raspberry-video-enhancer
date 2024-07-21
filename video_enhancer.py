@@ -1,11 +1,15 @@
-#!/usr/bin/env python
-
 import os
 import sys
 import subprocess
 import json
 import logging
 import shutil
+import yaml
+
+from utils import get_video_files
+from utils import get_unoptimized_video
+from utils import get_video_dir
+from utils import optimize_video
 
 #TODO: recoger parametro de serie, pelicula o anime
 #TODO: 1 Listar todos los contenidos del directorio actual
@@ -14,10 +18,40 @@ import shutil
 
 #for input_file in ./*.mkv; do ffmpeg -i "$input_file" -vcodec libx264 -b:v 2000k -preset medium -level:v 4.0 -pix_fmt yuv420p -profile:v high -c:a aac -b:a 159k -map 0  "./optimized/$(basename "${input_file%.*}").mkv"; done
 
-args = sys.argv[1:]
+logging.basicConfig(
+  filename='logs/enhancer.log',
+  level=logging.INFO,
+  format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+with open('config.yml', 'r') as file:
+  directories = yaml.safe_load(file)
+
+for source, settings in directories.items():
+  source_contents = os.listdir(settings['path'])
+  settings['contents'] = get_video_files(source_contents, settings['path'])
+  settings['unoptimized_videos'] = []
+
+  for video in settings['contents']:
+    unoptimized_video = get_unoptimized_video(video)
+    if(unoptimized_video):
+      settings['unoptimized_videos'].append(unoptimized_video)
+
+  print(settings['unoptimized_videos'])
+  
+  for video in settings['unoptimized_videos']:
+    video_dir = get_video_dir(video)
+    video_path = video.split('/')
+    video_name = video_path[-1]
+
+    new_video_path = f'{video_dir}/temp/{video_name}'
+
+    optimize_video(video, new_video_path, video_dir, settings)
+
+''' args = sys.argv[1:]
 
 logging.basicConfig(
-  filename='enhancer.log',
+  filename='logs/enhancer.log',
   level=logging.INFO,
   format='%(asctime)s - %(levelname)s - %(message)s'
 )
@@ -92,4 +126,4 @@ for video in video_files:
   elif video_data['format']['tags']['OPTIMIZED'] == 'false':
     unoptimized_videos.append(video)
 
-print(str(len(unoptimized_videos)) + ' videos sin optimizar')
+print(str(len(unoptimized_videos)) + ' videos sin optimizar') '''
