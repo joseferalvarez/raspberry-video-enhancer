@@ -4,7 +4,7 @@ import os
 import subprocess
 import shutil
 
-def optimize_video(current_path, new_path, current_dir, settings):
+def optimize_video(current_path, new_path, current_dir, settings, logging):
   command = "ffmpeg "
   command += f"-i {current_path} "
   command += "-metadata optimized=1 "
@@ -23,6 +23,13 @@ def optimize_video(current_path, new_path, current_dir, settings):
     os.mkdir(f'{current_dir}/temp')
 
   result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+  logging.info(f'Optimizing {current_path}: \n')
+
+  if result.stdout:
+    logging.info(f'Video {current_path} optimized succesfully\n')
+  if result.stderr:
+    logging.error(f'There has been an error in {current_path}: \n {result.stderr}')
 
   if os.path.exists(new_path):
     shutil.move(new_path, current_path)
