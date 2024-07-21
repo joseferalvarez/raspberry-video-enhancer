@@ -23,9 +23,9 @@ def optimize_video(current_path, new_path, current_dir, settings, logging):
   if not os.path.exists(f'{current_dir}/temp'):
     os.mkdir(f'{current_dir}/temp')
 
-  result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
   logging.info(f'Optimizing {current_path}: \n')
+
+  result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
   if result.stdout:
     logging.info(f'Video {current_path} optimized succesfully\n')
