@@ -2,7 +2,6 @@
 
 import os
 import subprocess
-import shutil
 
 def optimize_video(current_path, new_path, current_dir, settings, logging):
 
@@ -23,14 +22,11 @@ def optimize_video(current_path, new_path, current_dir, settings, logging):
   if not os.path.exists(f'{current_dir}/temp'):
     os.mkdir(f'{current_dir}/temp')
 
-  logging.info(f'Optimizing {current_path}: \n')
+  logging.info(f'Optimizing {current_path}.')
 
   result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
   if result.stdout:
-    logging.info(f'Video {current_path} optimized succesfully\n')
+    logging.info(f'Video {current_path} optimized succesfully.')
   if result.stderr:
-    logging.error(f'There has been an error in {current_path}: \n {result.stderr}')
-
-  if os.path.exists(new_path):
-    shutil.move(new_path, current_path)
+    logging.error(f'There has been an error in {current_path}.')

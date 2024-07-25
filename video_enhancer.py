@@ -1,7 +1,10 @@
 import os
 import logging
 import yaml
-from utils import get_video_files, get_unoptimized_video, get_video_dir, optimize_video
+import shutil
+from utils import get_video_files, get_unoptimized_video, get_video_dir, optimize_video, check_video_size
+
+GIGABITE_SIZE = 1024 ** 3
 
 logging.basicConfig(
   filename='logs/enhancer.log',
@@ -29,4 +32,11 @@ for source, settings in directories.items():
     video_name = video_path[-1]
     new_video_path = f'{video_dir}/temp/{video_name}'
 
-    optimize_video(video, new_video_path, video_dir, settings, logging)
+    optimize_video(video, new_video_path, video_dir, settings, logging
+)
+    video_size = check_video_size(new_video_path)
+
+    if os.path.exists(new_video_path) and video_size > 0:
+      shutil.move(new_video_path, video)
+      logging.info(f'''Video {new_video_path} moved succesfully to its original path {new_video_path}.\n
+                   Video size: {video_size / GIGABITE_SIZE}GB''')
