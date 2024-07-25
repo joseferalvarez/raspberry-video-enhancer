@@ -40,3 +40,5 @@ for source, settings in directories.items():
       shutil.move(new_video_path, video)
       logging.info(f'''Video {new_video_path} moved succesfully to its original path {new_video_path}.\n
                    Video size: {video_size / GIGABITE_SIZE}GB''')
+    else:
+      logging.error(f'Video {video} has not been optimized because of an error. The original video has been restored.')

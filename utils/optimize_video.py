@@ -29,4 +29,4 @@ def optimize_video(current_path, new_path, current_dir, settings, logging):
   if result.stdout:
     logging.info(f'Video {current_path} optimized succesfully.')
   if result.stderr:
-    logging.error(f'There has been an error in {current_path}.')
+    logging.warning(f'There has been an error in {current_path}.')
