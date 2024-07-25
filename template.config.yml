@@ -1,6 +1,6 @@
 ---
 source:
-  path: /your/source/path
+  path: /your/source/path/
   codec: libx264
   bitrate: 6000k
   preset: medium
@@ -11,7 +11,7 @@ source:
   arate: 159k
 
 source2:
-  path: /your/source/path2
+  path: /your/source/path2/
   codec: libx264
   bitrate: 6000k
   preset: medium
