@@ -27,18 +27,18 @@ for source, settings in directories.items():
   
   for video in settings['unoptimized_videos']:
     video_dir = get_video_dir(video)
-
+  
     video_path = video.split('/')
     video_name = video_path[-1]
     new_video_path = f'{video_dir}/temp/{video_name}'
-
-    optimize_video(video, new_video_path, video_dir, settings, logging
-)
+  
+    optimize_video(video, new_video_path, video_dir, settings, logging)
+  
     video_size = check_video_size(new_video_path)
 
     if os.path.exists(new_video_path) and video_size > 0:
       shutil.move(new_video_path, video)
-      logging.info(f'''Video {new_video_path} moved succesfully to its original path {new_video_path}.\n
+      logging.info(f'''Video {new_video_path} moved succesfully to its original path {video}\n
                    Video size: {video_size / GIGABITE_SIZE}GB''')
     else:
-      logging.error(f'Video {video} has not been optimized because of an error. The original video has been restored.')
+      logging.error(f'Video {video} has not been optimized because of an error. The original video has been restored')

@@ -16,17 +16,18 @@ def optimize_video(current_path, new_path, current_dir, settings, logging):
   command += f"-profile:v {settings['profile']} " if settings['profile'] else "-profile:v high "
   command += f"-c:a {settings['audio']} " if settings['audio'] else "-c:a aac "
   command += f"-b:a {settings['arate']} " if settings['arate'] else "-b:a 159k "
+  command += "-c:s copy "
   command += "-map 0 "
   command += f"'{new_path}'"
-
+  
   if not os.path.exists(f'{current_dir}/temp'):
     os.mkdir(f'{current_dir}/temp')
-
+    
   logging.info(f'Optimizing {current_path}.')
-
   result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
+    
   if result.stdout:
-    logging.info(f'Video {current_path} optimized succesfully.')
+    logging.info(f'Video {current_path} optimized succesfully')
+    
   if result.stderr:
-    logging.warning(f'There has been an error in {current_path}.')
+    logging.warning(f'There has been an error in {current_path} while using: \n{command}')

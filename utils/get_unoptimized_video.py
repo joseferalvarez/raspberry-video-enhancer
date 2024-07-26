@@ -16,7 +16,7 @@ def get_unoptimized_video(video):
     
     video_data = json.loads(result.stdout)
 
-    if not 'format' in video_data or not 'tags' in video_data['format'] or not 'OPTIMIZED' in video_data['format']['tags'] or video_data['format']['tags']['OPTIMIZED'] == "0":
+    if not 'format' in video_data or not 'tags' in video_data['format'] or not 'OPTIMIZED' in video_data['format']['tags'] or video_data['format']['tags']['OPTIMIZED'] == '0':
       return video
   
     return
