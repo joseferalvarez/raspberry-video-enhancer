@@ -38,7 +38,6 @@ for source, settings in directories.items():
 
     if os.path.exists(new_video_path) and video_size > 0:
       shutil.move(new_video_path, video)
-      logging.info(f'''Video {new_video_path} moved succesfully to its original path {video}\n
-                   Video size: {video_size / GIGABITE_SIZE}GB''')
+      logging.info(f'''Video {new_video_path} moved succesfully to its original path {video}\n Video size: {video_size / GIGABITE_SIZE}GB\n\n''')
     else:
       logging.error(f'Video {video} has not been optimized because of an error. The original video has been restored')
