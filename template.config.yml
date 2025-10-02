@@ -18,5 +18,5 @@ source2:
   level: '5.0'
   pixels: yuv420p
   profile: main
-  audio: aac
-  arate: 160k
+  audio: ac3
+  arate: 192k
