@@ -1,22 +1,22 @@
 ---
 source:
   path: /your/source/path/
-  codec: libx264
-  bitrate: 6000k
-  preset: medium
-  level: '4.0'
+  codec: libx265
+  bitrate: 8000k
+  preset: slow
+  level: '5.1'
   pixels: yuv420p
-  profile: high
-  audio: aac
-  arate: 159k
+  profile: main
+  audio: ac3
+  arate: 384k
 
 source2:
   path: /your/source/path2/
-  codec: libx264
+  codec: libx265
   bitrate: 6000k
-  preset: medium
-  level: '4.0'
+  preset: slow
+  level: '5.0'
   pixels: yuv420p
-  profile: high
+  profile: main
   audio: aac
-  arate: 159k
+  arate: 160k
