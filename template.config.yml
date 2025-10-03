@@ -2,7 +2,7 @@
 source:
   path: /your/source/path/
   codec: libx265
-  bitrate: 8000k
+  crf: 18
   preset: slow
   level: '5.1'
   pixels: yuv420p
@@ -13,10 +13,10 @@ source:
 source2:
   path: /your/source/path2/
   codec: libx265
-  bitrate: 6000k
-  preset: slow
+  crf: 22
+  preset: medium
   level: '5.0'
   pixels: yuv420p
   profile: main
-  audio: ac3
-  arate: 192k
+  audio: aac
+  arate: 160k
